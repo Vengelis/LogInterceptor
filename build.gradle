@@ -1,0 +1,32 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+    id 'application'
+}
+
+group = "fr.vengelis"
+version = "1.0-SNAPSHOT"
+mainClassName = 'fr.vengelis.loginterceptor.Main'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+}
+
+dependencies {
+    implementation(group: 'org.yaml', name: 'snakeyaml', version: '2.2')
+    implementation(group: 'com.google.code.gson', name: 'gson', version: '2.8.8')
+    implementation(group: 'org.apache.commons', name: 'commons-io', version: '1.3.2')
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    manifest {
+        attributes["Main-Class"] = mainClassName
+    }
+}
+
+application {
+    getMainClass().set(mainClassName)
+}
